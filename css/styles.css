@@ -18,26 +18,24 @@
 
 @keyframes modalWindow {
     0%{
-        transform: scaleX(0) scaleY(0);
+        transform: translate(-50%, -50%) scale(0);
         /* position: relative; */
         top: 50%;
         left: 50%;
 
         background-color: var(--background-color-4);
     
-        transform: translate(-50%, -50%);
         border-radius: 4px;
     }   
     
     100%{
-        transform: scaleX(1) scaleY(1);
+        transform: translate(-50%, -50%) scale(1);
 
         background-color: var(--background-color-4);
         /* position: relative; */
         top: 50%;
         left: 50%;
     
-        transform: translate(-50%, -50%);
         border-radius: 4px;
     }
 }
