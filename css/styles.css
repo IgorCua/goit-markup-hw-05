@@ -13,9 +13,58 @@
     --text-rgba-color: rgba(255, 255, 255, 0.6);
     --border-color-black: #000000;
     --border-color-grey: #AFB1B8;
-    --timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --tra: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@keyframes modalWindow {
+    0%{
+        transform: scaleX(0) scaleY(0);
+        /* position: relative; */
+        top: 50%;
+        left: 50%;
+
+        background-color: var(--background-color-4);
+    
+        transform: translate(-50%, -50%);
+        border-radius: 4px;
+    }   
+    
+    100%{
+        transform: scaleX(1) scaleY(1);
+
+        background-color: var(--background-color-4);
+        /* position: relative; */
+        top: 50%;
+        left: 50%;
+    
+        transform: translate(-50%, -50%);
+        border-radius: 4px;
+    }
+}
+/* .modal-backdrop.is-hidden{
+    visibility: hidden;
+    opacity: 1;
+    pointer-events: none;
+}
+.modal-backdrop{
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.modal-window{
+    width: 528px;
+    height: 581px;
+    background-color: var(--background-color-4);
+    position: relative;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+} */
 body{
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
@@ -31,14 +80,15 @@ h1,h2,h3,h4,h5,h6{
 
 a{
     color: var(--primary-header-color);
+    transition-property: color;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
 }
 
 a:hover,
-.header-contacts-envelope:hover,
-.header-contacts-smartphone:hover,
+svg:hover,
 a:focus,
-.header-contacts-envelope:focus,
-.header-contacts-smartphone:focus{
+svg:focus{
     color: var(--accent-color);
     fill: currentColor; 
 }
@@ -96,6 +146,9 @@ img{
     color: var(--primary-text-color);
 
     border-radius: 50%;
+    transition-property: background-color;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
 }
 
 .social-accounts svg{
@@ -104,17 +157,22 @@ img{
     margin: 0;
 
     fill: currentColor;
+    /*transition-property: color;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);*/
+    pointer-events: none;
 }
 
 .social-accounts a:hover,
 .social-accounts a:focus{
     color: var(--background-color-4);
     background-color: var(--accent-color);
+    
 }
 
 .social-accounts svg:hover,
 .social-accounts svg:hover{
-    fill: currentColor;
+    fill: var(--secondary-text-color);
 }
 /*===================== header ====================*/
 .header{
@@ -155,6 +213,35 @@ img{
     text-decoration: none;
 }
 
+.header-nav-list a{
+    position: relative;
+    
+
+}
+
+.header-nav-list a::after{
+    content: '';
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(34px);
+    opacity: 0;
+    pointer-events: none;
+
+    transition-property: background-color, opacity;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+}
+
+.header-nav-list a:hover::after{
+    content: '';
+    background-color: var(--accent-color);
+    opacity: 1;
+}
+
 .header-link{
     font-weight: 500;
     line-height: 1.4;
@@ -163,6 +250,21 @@ img{
     /*----- current page navigation text color ------*/
 .header .current{
     color: var(--accent-color);
+}
+.header .current::after{
+    color: var(--accent-color);
+    content: '';
+    width: 100%;
+    height: 4px;
+    display: inline-block;
+    background-color: var(--accent-color);
+    border-radius: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    transform: translateY(34px);
+    pointer-events: none;
+    opacity: 1;
 }
 
     /*------ div with contacts -------*/
@@ -333,6 +435,10 @@ img{
 .main-header-btn:hover,
 .main-header-btn:focus{
     background-color: #0e6bb7;
+
+    /* animation-name: modalWindow;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra); */
 }
 
 .main ul{
@@ -341,42 +447,80 @@ img{
 
     /* -------------modal window----------- */
 .modal-backdrop.is-hidden{
-    /* visibility: hidden;
-    opacity: 1;
-    pointer-events: none; */
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+
+    transition-duration: 250ms;
 }
+
+.modal-backdrop.is-hidden .modal-window{
+    transition-property: transform;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+    transform: translate(-50%, -50%) scale(0);
+    top: 50%;
+    left: 50%;
+}
+
 .modal-backdrop{
-    outline: red 2px solid;
     width: 100%;
     height: 100%;
     top: 0px;
     position: fixed;
     background: rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transition-duration: 250ms;
 }
 
 .modal-window{
+    position: absolute;
     width: 528px;
-    height: 581px;
-    background-color: var(--background-color-4);
-    position: relative;
+    height: 281px;
     top: 50%;
     left: 50%;
+    
+    background-color: var(--background-color-4);
     /* top: calc(50% - 290.5px);
     left: calc(50% - 264px); */
-    transform: translate(-50%, -50%);
+    transition-property: transform;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+    transform: translate(-50%, -50%) scale(1);
+    
     border-radius: 4px;
 }
 
 .modal-button{
     position: absolute;
-    opacity: 0.5;
     right: 8px;
     top: 8px;
-}
-.modal-test{
+    display: block;
     width: 30px;
     height: 30px;
-    outline: red 2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-color: var(--background-color-4);
+
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+
+    transition-property: background-color fill;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+}
+
+.modal-button:hover,
+.modal-button:focus,
+.modal-button svg:hover{
+    background-color: var(--accent-color);
+    fill: var(--background-color-4);
+}
+.modal-button svg{
+    width: 11px;
+    height: 11px;
 }
     /*------------ features ----------*/
 .main-features-header{
@@ -401,10 +545,11 @@ img{
     margin-bottom: 30px;
     width: 270px;
     height: 120px;
-    background-color: var(--background-color-3);
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: var(--background-color-3);
 }
 
 .main-features-list svg{
@@ -448,6 +593,29 @@ img{
     flex-wrap: wrap;
 }
 
+.main-what-we-do-list-container{
+    position: relative;
+}
+.main-what-we-do-list-container p{
+    position: absolute;
+    display: block;
+    text-align: center;
+    padding: 27px 0 27px 0;
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+
+    background: rgba(47, 48, 58, 0.8);
+    color: var(--secondary-text-color);
+}
 .main-what-we-do-list img{
     width: 370px;
 }
@@ -655,27 +823,64 @@ img{
     gap: 30px;
 }
 
-.portfolio-main-projects-list img{
-    width: 100%;
-}
 
-.portfolio-main-projects-list li{
+.portfolio-main-projects-list-element{
     background-color: var(--background-color-4);
     box-shadow: 0 0 0 1px var(--portfolio-border-color);
+    
+    transition-property: box-shadow;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
 }
 
-.portfolio-main-projects-list li:hover{
+.portfolio-main-projects-list-element:hover{
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 
                 0px 4px 4px rgba(0, 0, 0, 0.06), 
                 1px 4px 6px rgba(0, 0, 0, 0.16);
 }
 
-.portfolio-main-projects-list li:not(:last-child){
+.portfolio-main-projects-list-element:not(:last-child){
     margin-right: 0px;
 }
 
-.portfolio-main-projects-list div{
+.portfolio-main-projects-list div:nth-child(2){
     padding: 20px 24px;
+}
+.portfolio-projects-img-container{
+    position: relative;
+    overflow: hidden;
+}
+.portfolio-projects-img-container p{
+    margin: 0;
+    padding: 63px 24px 24px 24px;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 0.03em;
+
+    overflow: auto;
+    opacity: 0.9;
+    color: var(--secondary-text-color);
+    background-color: var(--accent-color);
+
+    transition-property: transform;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+
+}
+
+.portfolio-main-projects-list-element:hover .portfolio-main-projects-list-text{
+    transform: translateY(-100%);
+}
+
+.portfolio-main-projects-list img{
+    /* width: 100%; */
+    margin: 0;
 }
 
 .portfolio-main-projects-list-title{
