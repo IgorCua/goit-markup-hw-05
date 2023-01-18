@@ -121,7 +121,7 @@ img{
     color: var(--primary-text-color);
 
     border-radius: 50%;
-    transition-property: background-color;
+    transition-property: background-color, color;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
 }
@@ -176,12 +176,16 @@ img{
     margin-right: auto;
 }
 
-.header-nav-list li:nth-child(1){
-    margin-right: 53px;
+/* .header-nav-list li:nth-child(1){
+    margin-right: 50px;
 }
 
 .header-nav-list li:nth-child(2){
-    margin-right: 70px;
+    margin-right: 50px;
+} */
+
+.header-nav-list li:not(:last-child){
+    margin-right: 50px;
 }
 
 .header a{
@@ -211,12 +215,6 @@ img{
     transition-timing-function: var(--tra);
 }
 
-.header-nav-list a:hover::after{
-    content: '';
-    background-color: var(--accent-color);
-    opacity: 1;
-}
-
 .header-link{
     font-weight: 500;
     line-height: 1.4;
@@ -244,9 +242,17 @@ img{
 
     /*------ div with contacts -------*/
 .header-contacts{
+    padding: 0;
+    margin: 0;
     display: inline-block;
     text-align: center;
     display: flex;
+
+    list-style: none;
+}
+
+.header-contacts li:not(:last-child){
+    margin-right: 30px;
 }
 
 .header-contacts .header-link{
@@ -259,9 +265,6 @@ img{
     color: var(--primary-text-color);
 }
 
-.header-contacts-mail{
-    margin-right: 50px;
-}
 /*-------- contacts SVG --------*/
 /* svg mail */
 .header-contacts-envelope{
@@ -430,16 +433,21 @@ img{
     opacity: 0;
     pointer-events: none;
 
+    transition-property: transform;
     transition-duration: 250ms;
+    transition-timing-function: var(--tra);
+    /* transform: scale(0); */
 }
 
 .modal-backdrop.is-hidden .modal-window{
-    transition-property: transform;
+    transition-property: transform, opacity;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
     transform: translate(-50%, -50%) scale(0);
     top: 50%;
     left: 50%;
+
+    opacity: 0;
 }
 
 .modal-backdrop{
@@ -455,7 +463,7 @@ img{
 .modal-window{
     position: absolute;
     width: 528px;
-    height: 581px;
+    height: 281px;
     top: 50%;
     left: 50%;
     
@@ -702,6 +710,10 @@ img{
     border: 1px var(--border-color-grey) solid;
     border-radius: 4px;
     color: var(--border-color-grey);
+
+    transition-property: border-color, color, fill;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra);
 }
 
 .main-customers-list a:hover,
@@ -713,31 +725,15 @@ img{
 
 .main-customers-list svg{
     fill: currentColor;
+    /* transition-property: fill;
+    transition-duration: 250ms;
+    transition-timing-function: var(--tra); */
+    pointer-events: none;
 }
 
-.main-customers-icon:nth-child(1) svg{
-    width: 41px;
-    height: 47px;
-}
-.main-customers-icon:nth-child(2) svg{
-    width: 40px;
-    height: 52px;
-}
-.main-customers-icon:nth-child(3) svg{
-    width: 43px;
-    height: 41px;
-}
-.main-customers-icon:nth-child(4) svg{
-    width: 84px;
-    height: 41px;
-}
-.main-customers-icon:nth-child(5) svg{
-    width: 63px;
-    height: 45px;
-}
-.main-customers-icon:nth-child(6) svg{
-    width: 94px;
-    height: 44px;
+.main-customers-icon:nth-child(n) svg{
+    width: 106px;
+    height: 60px;
 }
 
 /*================= portfolio.html ===================*/
@@ -789,9 +785,6 @@ img{
     color: var(--secondary-text-color);
 
     background-color: var(--accent-color);
-}
-
-.portfolio-main-filter-btn{
 }
 
 .potrfolio-main-filter-btn-all{
