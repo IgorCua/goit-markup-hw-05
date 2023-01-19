@@ -145,10 +145,6 @@ img{
     
 }
 
-.social-accounts svg:hover,
-.social-accounts svg:hover{
-    fill: var(--secondary-text-color);
-}
 /*===================== header ====================*/
 .header{
     border-bottom: 1px solid var(--background-color-1);
@@ -371,8 +367,7 @@ img{
             rgba(47, 48, 58, 0.4)
         ), 
         url('../images/main-header-bg.jpg');
-    max-width: 1600px;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -436,18 +431,18 @@ img{
     transition-property: transform;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
-    /* transform: scale(0); */
+    
 }
 
 .modal-backdrop.is-hidden .modal-window{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    
+    opacity: 0;
     transition-property: transform, opacity;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
-    transform: translate(-50%, -50%) scale(0);
-    top: 50%;
-    left: 50%;
-
-    opacity: 0;
 }
 
 .modal-backdrop{
@@ -455,9 +450,13 @@ img{
     height: 100%;
     top: 0px;
     position: fixed;
-    background: rgba(0, 0, 0, 0.2);
     opacity: 1;
+    
+    background: rgba(0, 0, 0, 0.2);
+    
+    transition-property: transform, opacity;
     transition-duration: 250ms;
+    transition-timing-function: var(--tra);
 }
 
 .modal-window{
@@ -494,7 +493,7 @@ img{
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
 
-    transition-property: background-color fill;
+    transition-property: background-color, fill;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
 }
@@ -775,7 +774,7 @@ img{
     border-radius: 4px;
     border: none;
 
-    transition-property: background-color color;
+    transition-property: background-color, color;
     transition-duration: 250ms;
     transition-timing-function: var(--tra);
 }
